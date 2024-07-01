@@ -457,12 +457,22 @@ table{
   font-size: 3rem;
   border: 1px solid;
   margin: auto;
+  border-collapse: collapse;
 }
 
 th, td {
   border: 1px solid;
+  border-bottom: 1px solid red;
+}
+th{
+  height: 70px;
 }
 
+td {
+  text-align: center;
+}
+tr:hover {background-color: rgb(35, 25, 21);}
+tr:nth-child(even) {background-color: #430202;}
 
 
 

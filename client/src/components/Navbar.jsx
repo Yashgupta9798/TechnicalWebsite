@@ -9,7 +9,7 @@ const {isLoggedIn} = useAuth();
         <header>
             <div className="container">
                 <div className="logo-brand">
-                    <NavLink href="/">ThapaTechnical</NavLink>
+                    <NavLink href="/">Techify</NavLink>
                 </div>
                 <nav>
                     <ul>

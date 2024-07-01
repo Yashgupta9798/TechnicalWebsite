@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";// to get the token from context api to pass in the header
+import { Link } from "react-router-dom";// for the editing function in the database user
 
 export const AdminUsers = () =>{
     const [users, setUsers] = useState([]);
@@ -35,7 +36,7 @@ export const AdminUsers = () =>{
 
             if(response.ok){
                 getAllUsersData();// so that we do not have to refresh the page after deletion as we have called this function in the use effect so to run the function again we will call it after deletion
-                
+
             }
             
         } catch (error) {
@@ -68,7 +69,8 @@ export const AdminUsers = () =>{
                             <td>{curUser.username}</td>
                             <td>{curUser.email}</td>
                             <td>{curUser.phone}</td>
-                            <td>Edit</td>
+                            //! this is not implemented yet
+                            <td><Link to={`/admin/users/${curUser._id}/edit`}>Edit</Link></td>
                             <td><button onClick={() =>deleteUser(curUser._id)}>Delete</button></td>
                         </tr>
                     })}

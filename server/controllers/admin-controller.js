@@ -22,6 +22,40 @@ const getAllUsers = async (req, res) =>{
 
 }
 
+
+
+//*------------------------------
+//* single user edit Logic
+//*------------------------------
+const getUserById = async (req, res) =>{
+    try {
+        // console.log("user id from the frontend",req.params.id);
+        const id = req.params.id;// we are using params here because the id coming form the frontend to delete the perticular use is in the url
+        const data = await User.findOne({_id : id}, {password:0}); //we are saying that _id = id
+        return res.status(200).json(data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+//*------------------------------
+//* single user update Logic
+//*------------------------------
+const updateUserById = async (req, res) =>{
+    try {
+        const id = req.params.id;//kismay update kerna hai
+        const updatedUserData = req.body;//kis data se update kerna hai wo form fill kerte wakt ayega
+
+        const updatedData = await User.updateOne({_id:id}, {$set: updatedUserData,})//here User is the model
+        return res.status(200).json(updatedData);
+    } catch (error) {
+        next(error);
+    }
+}
+
+
 //*------------------------------
 //* user delete Logic
 //*------------------------------
@@ -54,4 +88,4 @@ const getAllContacts = async (req, res) =>{
 }
 
 
-module.exports = {getAllUsers,getAllContacts, deleteUserById};
+module.exports = {getAllUsers,getAllContacts, deleteUserById,getUserById, updateUserById};
