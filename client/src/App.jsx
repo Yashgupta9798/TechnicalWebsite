@@ -9,6 +9,9 @@ import {Navbar} from "./components/Navbar"
 import { Error } from "./pages/Error";
 import { Footer } from "./components/Footer/Footer";
 import {Logout} from "./pages/Logout";
+import { AdminLayout } from "./components/layouts/Admin-Layout"; // for the admin page
+import { AdminUsers } from "./pages/Admin-Users";//for the admin>>to get all the users
+import { AdminContacts } from "./pages/Admin-Contacts";// for the admin >> to get all the contacts
 
 const App = () => {
   return <>
@@ -23,6 +26,13 @@ const App = () => {
         <Route path="/login" element={<Login />}/>
         <Route path="/logout" element={<Logout />}/>
         <Route path="*" element={<Error />}/>
+
+        {/* making a nested loop */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="users" element={<AdminUsers />} /> {/**for nested loop>> admin/users */}
+          <Route path="contacts" element={<AdminContacts />} /> {/**for nested loop>> admin/users */}
+        </Route>
+        
       </Routes>
       <Footer />
     </BrowserRouter>

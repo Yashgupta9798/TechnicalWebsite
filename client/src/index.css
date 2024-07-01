@@ -445,6 +445,29 @@ a.active {
   }
 }
 
+
+/**------------------------
+** My own css for table in the users
+** ------------------------*/
+
+table{
+  color: pink;
+  height: 10rem;
+  width: 100rem;
+  font-size: 3rem;
+  border: 1px solid;
+  margin: auto;
+}
+
+th, td {
+  border: 1px solid;
+}
+
+
+
+
+
+
 /** -----------------------
 ** media query section css
 ** -------------------------  */

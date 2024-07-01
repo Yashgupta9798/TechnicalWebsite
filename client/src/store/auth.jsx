@@ -10,6 +10,7 @@ export const AuthProvider = ({children}) =>{
     const [token, setToken] = useState(localStorage.getItem("token")); //getting the token stored in the local storage and storing/initializing in the token variable
     const [user,setUser] = useState("");
     const [services, setServices] = useState("");
+    const authorizationToken = `Bearer ${token}`;//token from the local storage that we have earlier stored
 
     const storeTokenInLS = (serverToken) =>{
         setToken(serverToken);
@@ -32,7 +33,7 @@ export const AuthProvider = ({children}) =>{
                 {
                     method: "GET",
                     headers:{
-                        Authorization: `Bearer ${token}`,//token from the local storage that we have earlier stored
+                        Authorization: authorizationToken,
                     },
                 }
             );
@@ -74,7 +75,7 @@ export const AuthProvider = ({children}) =>{
 
     return (
         //step 2--> creating the provider
-        <AuthContext.Provider value = {{isLoggedIn,storeTokenInLS, LogoutUser, user, services}} >
+        <AuthContext.Provider value = {{isLoggedIn,storeTokenInLS, LogoutUser, user, services, authorizationToken}} >
             {children}
         </AuthContext.Provider>
     )

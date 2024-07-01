@@ -23,6 +23,20 @@ const getAllUsers = async (req, res) =>{
 }
 
 //*------------------------------
+//* user delete Logic
+//*------------------------------
+const deleteUserById = async (req, res) =>{
+    try {
+        // console.log("user id from the frontend",req.params.id);
+        const id = req.params.id;// we are using params here because the id coming form the frontend to delete the perticular use is in the url
+        await User.deleteOne({_id : id}); //we are saying that _id = id
+        return res.status(200).json({message:"Users Deleted Successfully"});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//*------------------------------
 //* getAllContact Logic
 //*------------------------------
 const getAllContacts = async (req, res) =>{
@@ -39,4 +53,5 @@ const getAllContacts = async (req, res) =>{
 
 }
 
-module.exports = {getAllUsers,getAllContacts};
+
+module.exports = {getAllUsers,getAllContacts, deleteUserById};

@@ -8,6 +8,7 @@ const authMiddleware = async (req, res, next) =>{
 
     if(!token){
         //if you attempt to use the expired token, you'll recieve a "401" unauthorized HTTP response
+        // console.log("checking message",req.header.authorization);
         return res.status(401).json({message: "Unauthorized HTTP, Token not provided"});
     }
     //Assuming token is in the format "Bearer <JwtToken>, Removing the "Bearer" Prefix"
