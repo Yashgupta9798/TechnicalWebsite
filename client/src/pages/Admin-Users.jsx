@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";// for the editing function in the datab
 export const AdminUsers = () =>{
     const [users, setUsers] = useState([]);
 
-    const {authorizationToken} = useAuth();
+    const {authorizationToken, API} = useAuth();
     const getAllUsersData = async () =>{
         try {
-            const response = await fetch("http://localhost:5000/api/admin/users",{
+            const response = await fetch(`${API}/api/admin/users`,{
                 method:"GET",
                 headers:{
                     Authorization: authorizationToken,//from the context api>>auth.jsx

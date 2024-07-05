@@ -12,7 +12,7 @@ export const Register = () =>{
     });
 
     const navigate = useNavigate();
-    const {storeTokenInLS} = useAuth();//making a object to use the context api//also done destructuring
+    const {storeTokenInLS, API} = useAuth();//making a object to use the context api//also done destructuring
 
     // handling the input values
     const handleInput = (e) =>{
@@ -33,7 +33,7 @@ export const Register = () =>{
         console.log(user);
 
         try {
-            const response = await fetch(`http://localhost:5000/api/auth/register`,{
+            const response = await fetch(`${API}/api/auth/register`,{
                 method: "POST", 
                 headers:{
                     'Content-Type': "application/json",

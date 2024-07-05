@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "../store/auth"; // for the context api means not need to pass the props in every components--> const 
 import { toast } from 'react-toastify';
 
-const URL = "http://localhost:5000/api/auth/login"; //!backend login page url
+// const URL = "http://localhost:5000/api/auth/login"; //!backend login page url
 
 export const Login = () =>{
     const[user, setUser]= useState({
@@ -12,7 +12,7 @@ export const Login = () =>{
     })
 
     const navigate = useNavigate();
-    const {storeTokenInLS} = useAuth();//making a object to use the context api//also done destructuring because we are not exporting default
+    const {storeTokenInLS, API} = useAuth();//making a object to use the context api//also done destructuring because we are not exporting default
 
     const handleInput = (e)=>{
         let name = e.target.name;
@@ -29,7 +29,7 @@ export const Login = () =>{
         console.log(user);
 
         try {
-            const response = await fetch(URL,{
+            const response = await fetch(`${API}/api/auth/login`,{
                 method: "POST",
                 headers:{
                     'Content-Type': "application/json",

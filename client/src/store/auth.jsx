@@ -13,7 +13,8 @@ export const AuthProvider = ({children}) =>{
     const authorizationToken = `Bearer ${token}`;//token from the local storage that we have earlier stored
     const [isLoading, setIsLoading] = useState(true);// such that while setting the user data is loading is applied so that we can block the path of admin page
 
-    const API = import.meta.env.VITE_APP_URI_API;
+    //!for final hosting
+    const API = import.meta.env.VITE_APP_URI_API;// for the hosting purpose
 
     const storeTokenInLS = (serverToken) =>{
         setToken(serverToken);
@@ -33,7 +34,7 @@ export const AuthProvider = ({children}) =>{
     const userAuthentication = async ()=>{
         try {
             setIsLoading(true);
-            const response = await fetch("http://localhost:5000/api/auth/user",
+            const response = await fetch(`${API}/api/auth/user`,
                 {
                     method: "GET",
                     headers:{
@@ -60,7 +61,7 @@ export const AuthProvider = ({children}) =>{
     //to fetch the data of services from the database
     const getServices = async () =>{
         try {
-            const response = await fetch("http://localhost:5000/api/data/service",{
+            const response = await fetch(`${API}/api/data/service`,{
                 method: "GET",
             });
 
@@ -83,7 +84,7 @@ export const AuthProvider = ({children}) =>{
 
     return (
         //step 2--> creating the provider
-        <AuthContext.Provider value = {{isLoggedIn,storeTokenInLS, LogoutUser, user, services, authorizationToken, isLoading}} >
+        <AuthContext.Provider value = {{isLoggedIn,storeTokenInLS, LogoutUser, user, services, authorizationToken, isLoading, API}} >
             {children}
         </AuthContext.Provider>
     )
