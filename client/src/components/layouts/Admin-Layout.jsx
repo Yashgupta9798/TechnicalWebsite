@@ -1,8 +1,18 @@
-import { NavLink, Outlet } from "react-router-dom"
+import { NavLink, Outlet ,Navigate} from "react-router-dom"
 import { FaHome, FaRegListAlt, FaUser } from "react-icons/fa";//for the user icon
 import { FaMessage } from "react-icons/fa6";// for the contacts icon
+import {useAuth} from "../../store/auth"
 
 export const AdminLayout = ()  =>{
+    const {user, isLoading} = useAuth();
+    console.log("admin Layout",user);
+
+    if(isLoading){
+        return <h1>Loading ...</h1>
+    }
+    if(!user.isAdmin){
+        return <Navigate to="/" />
+    }
     return <>
         <header>
             <div className="container">

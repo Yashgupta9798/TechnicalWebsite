@@ -9,8 +9,11 @@ export const AuthProvider = ({children}) =>{
 
     const [token, setToken] = useState(localStorage.getItem("token")); //getting the token stored in the local storage and storing/initializing in the token variable
     const [user,setUser] = useState("");
-    const [services, setServices] = useState("");
+    const [services, setServices] = useState([]);
     const authorizationToken = `Bearer ${token}`;//token from the local storage that we have earlier stored
+    const [isLoading, setIsLoading] = useState(true);// such that while setting the user data is loading is applied so that we can block the path of admin page
+
+    const API = import.meta.env.VITE_APP_URI_API;
 
     const storeTokenInLS = (serverToken) =>{
         setToken(serverToken);
@@ -29,6 +32,7 @@ export const AuthProvider = ({children}) =>{
     //JWT AUTHENTICATION --> to get the currently logged in data--> to display the name
     const userAuthentication = async ()=>{
         try {
+            setIsLoading(true);
             const response = await fetch("http://localhost:5000/api/auth/user",
                 {
                     method: "GET",
@@ -43,6 +47,10 @@ export const AuthProvider = ({children}) =>{
                 console.log("user data", data.userData);
                 // console.log(user);
                 setUser(data.userData);
+                setIsLoading(false);//such that admin path will be bloked for non admin user
+            }else{
+                console.error("Error fetching user data");
+                setIsLoading(false);
             }
         } catch (error) {
             console.log("error fetching the data", error);
@@ -75,7 +83,7 @@ export const AuthProvider = ({children}) =>{
 
     return (
         //step 2--> creating the provider
-        <AuthContext.Provider value = {{isLoggedIn,storeTokenInLS, LogoutUser, user, services, authorizationToken}} >
+        <AuthContext.Provider value = {{isLoggedIn,storeTokenInLS, LogoutUser, user, services, authorizationToken, isLoading}} >
             {children}
         </AuthContext.Provider>
     )

@@ -12,6 +12,7 @@ import {Logout} from "./pages/Logout";
 import { AdminLayout } from "./components/layouts/Admin-Layout"; // for the admin page
 import { AdminUsers } from "./pages/Admin-Users";//for the admin>>to get all the users
 import { AdminContacts } from "./pages/Admin-Contacts";// for the admin >> to get all the contacts
+import { AdminUpdate } from "./pages/Admin-Update";//for the update purpost>>edit button click
 
 const App = () => {
   return <>
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="users" element={<AdminUsers />} /> {/**for nested loop>> admin/users */}
           <Route path="contacts" element={<AdminContacts />} /> {/**for nested loop>> admin/users */}
+          <Route path="users/:id/edit" element={<AdminUpdate />} />
         </Route>
         
       </Routes>

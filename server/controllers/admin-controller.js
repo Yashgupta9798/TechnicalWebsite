@@ -25,7 +25,7 @@ const getAllUsers = async (req, res) =>{
 
 
 //*------------------------------
-//* single user edit Logic
+//* single user edit Logic (only to get the info of the user when edit button is clicked)
 //*------------------------------
 const getUserById = async (req, res) =>{
     try {
@@ -41,7 +41,7 @@ const getUserById = async (req, res) =>{
 
 
 //*------------------------------
-//* single user update Logic
+//* single user update Logic// to update the existing user info after edit button
 //*------------------------------
 const updateUserById = async (req, res) =>{
     try {
@@ -84,8 +84,20 @@ const getAllContacts = async (req, res) =>{
     } catch (error) {
         next(error);
     }
+}
 
+//*------------------------------
+//* contacts delete Logic
+//*------------------------------
+const deleteContactById = async (req, res) =>{
+    try {
+        const id = req.params.id;// we are using params here because the id coming form the frontend to delete the perticular use is in the url
+        await Contact.deleteOne({_id : id}); //we are saying that _id = id
+        return res.status(200).json({message:"Contact Deleted Successfully"});
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
-module.exports = {getAllUsers,getAllContacts, deleteUserById,getUserById, updateUserById};
+module.exports = {getAllUsers,getAllContacts, deleteUserById,getUserById, updateUserById, deleteContactById};

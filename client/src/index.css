@@ -475,6 +475,21 @@ tr:hover {background-color: rgb(35, 25, 21);}
 tr:nth-child(even) {background-color: #430202;}
 
 
+/**------------------------
+** My own css for contact admin
+** ------------------------*/
+
+.admin-contact{
+  /* word-spacing: 1rem; */
+  margin: 2rem;
+  border: 2px solid rgb(103, 103, 232);
+  
+}
+
+
+
+
+
 
 
 
